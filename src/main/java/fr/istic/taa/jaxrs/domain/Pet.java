@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import io.swagger.v3.oas.models.tags.Tag;
 
 @XmlRootElement(name = "Pet")
-public class Pet {
+public class Pet implements Serializable {
   private long id;
   private String name;
   private List<Tag> tags = new ArrayList<Tag>();

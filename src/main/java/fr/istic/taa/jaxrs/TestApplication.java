@@ -1,13 +1,13 @@
 /**
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,14 +16,16 @@
  */
 package fr.istic.taa.jaxrs;
 
+import fr.istic.taa.jaxrs.rest.CollaborateurResource;
+import fr.istic.taa.jaxrs.rest.FicheResource;
+import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.ws.rs.core.Application;
-
-import fr.istic.taa.jaxrs.rest.PetResource;
-import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
-
+@ApplicationPath("/")
 public class TestApplication extends Application {
 
 
@@ -32,11 +34,10 @@ public class TestApplication extends Application {
 
         final Set<Class<?>> clazzes = new HashSet<Class<?>>();
 
-        clazzes.add(PetResource.class);
         clazzes.add(OpenApiResource.class);
-        
+        clazzes.add(CollaborateurResource.class);
+        clazzes.add(FicheResource.class);
 
         return clazzes;
     }
-
 }

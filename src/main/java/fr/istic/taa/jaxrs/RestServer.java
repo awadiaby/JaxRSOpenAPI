@@ -23,7 +23,7 @@ public class RestServer {
 
         ut.start(
                 Undertow.builder()
-                        .addHttpListener(8087, "localhost")
+                        .addHttpListener(8089, "localhost")
 
         );
 

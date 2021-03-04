@@ -2,11 +2,8 @@ package fr.istic.taa.jaxrs.dao.impl;
 
 
 import fr.istic.taa.jaxrs.dao.generic.AbstractJpaDao;
-import fr.istic.taa.jaxrs.dao.generic.EntityManagerHelper;
 import fr.istic.taa.jaxrs.domain.Collaborateur;
 
-
-import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class CollaborateurDAO extends AbstractJpaDao<Long, Collaborateur> {

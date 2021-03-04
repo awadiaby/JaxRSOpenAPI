@@ -18,6 +18,7 @@ package fr.istic.taa.jaxrs;
 
 import fr.istic.taa.jaxrs.rest.CollaborateurResource;
 import fr.istic.taa.jaxrs.rest.FicheResource;
+import fr.istic.taa.jaxrs.rest.SwaggerResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 
 import javax.ws.rs.ApplicationPath;
@@ -32,12 +33,13 @@ public class TestApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
 
-        final Set<Class<?>> clazzes = new HashSet<Class<?>>();
+        final Set<Class<?>> resources = new HashSet<Class<?>>();
 
-        clazzes.add(OpenApiResource.class);
-        clazzes.add(CollaborateurResource.class);
-        clazzes.add(FicheResource.class);
+        resources.add(OpenApiResource.class);
+        resources.add(CollaborateurResource.class);
+        resources.add(FicheResource.class);
+        resources.add(SwaggerResource.class);
 
-        return clazzes;
+        return resources;
     }
 }

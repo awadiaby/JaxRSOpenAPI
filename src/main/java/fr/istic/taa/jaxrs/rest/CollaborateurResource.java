@@ -20,7 +20,7 @@ public class CollaborateurResource {
     }
 
     @GET
-    @Path("/{collaborateurName}")
+    @Path("/name={collaborateurName}")
     public List<Collaborateur> getCollaborateurByName(@PathParam("collaborateurName") String collaborateurName) {
         CollaborateurDAO dao = new CollaborateurDAO();
         return dao.getCollaborateurByName(collaborateurName);

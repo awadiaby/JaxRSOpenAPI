@@ -87,7 +87,7 @@ public class Fiche implements Serializable {
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = new Date();
     }
 
     @ManyToOne

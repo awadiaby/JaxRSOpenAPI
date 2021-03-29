@@ -22,6 +22,7 @@ public class Fiche implements Serializable {
     private Collaborateur collaborateur;
     private Long dureeTache;
     private String commit;
+    private Section section;
 
     @Id
     @GeneratedValue
@@ -98,6 +99,16 @@ public class Fiche implements Serializable {
     public void setCollaborateur(Collaborateur collaborateur) {
         this.collaborateur = collaborateur;
     }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    @ManyToOne
+    public Section getSection() {
+        return section;
+    }
+
 
     @Override
     public String toString() {

@@ -16,9 +16,7 @@
  */
 package fr.istic.taa.jaxrs;
 
-import fr.istic.taa.jaxrs.rest.CollaborateurResource;
-import fr.istic.taa.jaxrs.rest.FicheResource;
-import fr.istic.taa.jaxrs.rest.SwaggerResource;
+import fr.istic.taa.jaxrs.rest.*;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 
 import javax.ws.rs.ApplicationPath;
@@ -38,6 +36,8 @@ public class TestApplication extends Application {
         resources.add(OpenApiResource.class);
         resources.add(CollaborateurResource.class);
         resources.add(FicheResource.class);
+        resources.add(SectionResource.class);
+        resources.add(TableauResource.class);
         resources.add(SwaggerResource.class);
 
         return resources;

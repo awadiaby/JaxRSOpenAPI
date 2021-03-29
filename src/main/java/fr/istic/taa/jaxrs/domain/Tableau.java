@@ -1,14 +1,17 @@
 package fr.istic.taa.jaxrs.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Tableau {
+public class Tableau implements Serializable {
     private Long id;
     private String nom;
     private Date dateCreation;
-    private Section section;
+    private List<Section> sections = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -34,15 +37,15 @@ public class Tableau {
     }
 
     public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
+        this.dateCreation = new Date();
     }
 
-    @ManyToOne
-    public Section getSection() {
-        return section;
+    @ManyToMany(mappedBy = "tableaux")
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setSection(Section section) {
-        this.section = section;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }

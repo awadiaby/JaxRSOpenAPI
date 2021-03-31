@@ -1,5 +1,7 @@
 package fr.istic.taa.jaxrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,8 +41,8 @@ public class Tableau implements Serializable {
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = new Date();
     }
-
-    @ManyToMany(mappedBy = "tableaux")
+    @JsonIgnore
+    @OneToMany(mappedBy = "tableau", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     public List<Section> getSections() {
         return sections;
     }

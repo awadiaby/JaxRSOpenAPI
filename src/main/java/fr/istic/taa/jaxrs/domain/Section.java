@@ -11,7 +11,7 @@ import java.util.List;
 public class Section implements Serializable {
     private Long id;
     private TypeSection status;
-    private List<Tableau> tableaux = new ArrayList<>();
+    private Tableau tableau;
     private List<Fiche> fiches = new ArrayList<>();
 
     @Id
@@ -44,13 +44,13 @@ public class Section implements Serializable {
     }
 
 
-    @JsonIgnore
-    @ManyToMany()
-    public List<Tableau> getTableaux() {
-        return tableaux;
+    public void setTableau(Tableau tableau) {
+        this.tableau = tableau;
     }
 
-    public void setTableaux(List<Tableau> tableaux) {
-        this.tableaux = tableaux;
+    @ManyToOne()
+    public Tableau getTableau() {
+        return tableau;
     }
+
 }

@@ -1,7 +1,11 @@
 package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.TableauDao;
+import fr.istic.taa.jaxrs.domain.Fiche;
+import fr.istic.taa.jaxrs.domain.Section;
 import fr.istic.taa.jaxrs.domain.Tableau;
+import fr.istic.taa.jaxrs.dto.FicheDTO;
+import fr.istic.taa.jaxrs.dto.SectionDTO;
 import fr.istic.taa.jaxrs.dto.TableauDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -15,25 +19,21 @@ import java.util.List;
 public class TableauResource {
     @GET
     @Path("/{tableauId}")
-    public Tableau getTableauById(@PathParam("tableauId") Long tableauId) {
+    public TableauDTO getTableauById(@PathParam("tableauId") Long tableauId) {
         TableauDao dao = new TableauDao();
-        return dao.findOne(tableauId);
+        return TableauDTO.fromTableau(dao.findOne(tableauId));
     }
 
     @GET
     @Path("/all")
-    public List<TableauDTO> getAllTableaus() {
+    public List<TableauDTO> getAllTableaux() {
         TableauDao dao = new TableauDao();
         List<Tableau> dbTableaux = dao.findAll();
-        List<TableauDTO> jsonTableaux = new ArrayList<>();
+        List<TableauDTO> tableaux = new ArrayList<>();
         for (Tableau t: dbTableaux) {
-            TableauDTO dto = new TableauDTO();
-            dto.setNom(t.getNom());
-            dto.setDateCreation(t.getDateCreation().toString());
-            dto.setSections(t.getSections());
-            jsonTableaux.add(dto);
+            tableaux.add(TableauDTO.fromTableau(t));
         }
-        return jsonTableaux;
+        return tableaux;
     }
 
     @POST

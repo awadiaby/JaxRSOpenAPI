@@ -3,10 +3,12 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.SectionDao;
 import fr.istic.taa.jaxrs.domain.Section;
+import fr.istic.taa.jaxrs.dto.SectionDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/section")
@@ -14,16 +16,20 @@ import java.util.List;
 public class SectionResource {
     @GET
     @Path("/{sectionId}")
-    public Section getSectionById(@PathParam("sectionId") Long sectionId) {
+    public SectionDTO getSectionById(@PathParam("sectionId") Long sectionId) {
         SectionDao dao = new SectionDao();
-        return dao.findOne(sectionId);
+        return SectionDTO.fromSection(dao.findOne(sectionId));
     }
 
     @GET
     @Path("/all")
-    public List<Section> getAllSections() {
+    public List<SectionDTO> getAllSections() {
         SectionDao dao = new SectionDao();
-        return dao.findAll();
+        List<SectionDTO> sections = new ArrayList<>();
+        for (Section section: dao.findAll()) {
+            sections.add(SectionDTO.fromSection(section));
+        }
+        return sections;
     }
 
     @POST

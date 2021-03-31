@@ -3,10 +3,12 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.FicheDao;
 import fr.istic.taa.jaxrs.domain.Fiche;
+import fr.istic.taa.jaxrs.dto.FicheDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/fiche")
@@ -16,16 +18,22 @@ public class FicheResource {
 
     @GET
     @Path("/{ficheId}")
-    public Fiche getFicheById(@PathParam("ficheId") Long ficheId) {
+    public FicheDTO getFicheById(@PathParam("ficheId") Long ficheId) {
         FicheDao dao = new FicheDao();
-        return dao.findOne(ficheId);
+        Fiche dbFiche = dao.findOne(ficheId);
+
+        return FicheDTO.fromFiche(dbFiche);
     }
 
     @GET
     @Path("/all")
-    public List<Fiche> getAllFiches() {
+    public List<FicheDTO> getAllFiches() {
         FicheDao dao = new FicheDao();
-        return dao.findAll();
+        List<FicheDTO> fiches = new ArrayList<>();
+        for (Fiche fiche: dao.findAll()) {
+            fiches.add(FicheDTO.fromFiche(fiche));
+        }
+        return fiches;
     }
 
     @POST

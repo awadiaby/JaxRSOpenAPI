@@ -2,10 +2,12 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.CollaborateurDAO;
 import fr.istic.taa.jaxrs.domain.Collaborateur;
+import fr.istic.taa.jaxrs.dto.CollaborateurDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/collaborateur")
@@ -14,23 +16,34 @@ import java.util.List;
 public class CollaborateurResource {
     @GET
     @Path("/{collaborateurId}")
-    public Collaborateur getCollaborateurById(@PathParam("collaborateurId") Long collaborateurId) {
+    public CollaborateurDTO getCollaborateurById(@PathParam("collaborateurId") Long collaborateurId) {
         CollaborateurDAO dao = new CollaborateurDAO();
-        return dao.findOne(collaborateurId);
+        Collaborateur dbCollaborateur = dao.findOne(collaborateurId);
+        return CollaborateurDTO.fromCollaborateur(dbCollaborateur);
     }
 
     @GET
     @Path("/name={collaborateurName}")
-    public List<Collaborateur> getCollaborateurByName(@PathParam("collaborateurName") String collaborateurName) {
+    public List<CollaborateurDTO> getCollaborateurByName(@PathParam("collaborateurName") String collaborateurName) {
         CollaborateurDAO dao = new CollaborateurDAO();
-        return dao.getCollaborateurByName(collaborateurName);
+        List<Collaborateur> dbCollaborateurs = dao.getCollaborateurByName(collaborateurName);
+        List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
+        for (Collaborateur clb: dbCollaborateurs) {
+            jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
+        }
+        return jsonCollaborateurs;
     }
 
     @GET
     @Path("/all")
-    public List<Collaborateur> getAllCollaborateurs() {
+    public List<CollaborateurDTO> getAllCollaborateurs() {
         CollaborateurDAO dao = new CollaborateurDAO();
-        return dao.findAll();
+        List<Collaborateur> dbCollaborateurs = dao.findAll();
+        List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
+        for (Collaborateur clb: dbCollaborateurs) {
+            jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
+        }
+        return jsonCollaborateurs;
     }
 
     @POST

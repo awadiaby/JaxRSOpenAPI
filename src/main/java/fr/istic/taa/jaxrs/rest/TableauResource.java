@@ -2,10 +2,12 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.TableauDao;
 import fr.istic.taa.jaxrs.domain.Tableau;
+import fr.istic.taa.jaxrs.dto.TableauDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/tableau")
@@ -20,9 +22,18 @@ public class TableauResource {
 
     @GET
     @Path("/all")
-    public List<Tableau> getAllTableaus() {
+    public List<TableauDTO> getAllTableaus() {
         TableauDao dao = new TableauDao();
-        return dao.findAll();
+        List<Tableau> dbTableaux = dao.findAll();
+        List<TableauDTO> jsonTableaux = new ArrayList<>();
+        for (Tableau t: dbTableaux) {
+            TableauDTO dto = new TableauDTO();
+            dto.setNom(t.getNom());
+            dto.setDateCreation(t.getDateCreation().toString());
+            dto.setSections(t.getSections());
+            jsonTableaux.add(dto);
+        }
+        return jsonTableaux;
     }
 
     @POST

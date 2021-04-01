@@ -1,6 +1,5 @@
 package fr.istic.taa.jaxrs.rest;
 
-
 import fr.istic.taa.jaxrs.dao.impl.FicheDao;
 import fr.istic.taa.jaxrs.domain.Fiche;
 import fr.istic.taa.jaxrs.dto.FicheDTO;
@@ -30,22 +29,29 @@ public class FicheResource {
 
     @GET
     @Path("/{ficheId}")
-    public FicheDTO getFicheById(@PathParam("ficheId") Long ficheId) {
+    public Response getFicheById(@PathParam("ficheId") Long ficheId) {
         FicheDao dao = new FicheDao();
         Fiche dbFiche = dao.findOne(ficheId);
+        if (dbFiche == null)
+            return Response.ok().entity("Aucune fiche n'a été trouvée").build();
 
-        return FicheDTO.fromFiche(dbFiche);
+        return Response.ok().entity(FicheDTO.fromFiche(dbFiche)).build();
     }
 
     @GET
     @Path("/all")
-    public List<FicheDTO> getAllFiches() {
+    public Response getAllFiches() {
         FicheDao dao = new FicheDao();
+        List<Fiche> dbFiches = dao.findAll();
+        if (dbFiches == null || dbFiches.isEmpty())
+            return Response.ok().entity("Aucune fiche n'a été trouvée").build();
+
         List<FicheDTO> fiches = new ArrayList<>();
         for (Fiche fiche : dao.findAll()) {
             fiches.add(FicheDTO.fromFiche(fiche));
         }
-        return fiches;
+
+        return Response.ok().entity(fiches).build();
     }
 
     @DELETE()

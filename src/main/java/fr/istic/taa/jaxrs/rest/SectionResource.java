@@ -16,20 +16,28 @@ import java.util.List;
 public class SectionResource {
     @GET
     @Path("/{sectionId}")
-    public SectionDTO getSectionById(@PathParam("sectionId") Long sectionId) {
+    public Response getSectionById(@PathParam("sectionId") Long sectionId) {
         SectionDao dao = new SectionDao();
-        return SectionDTO.fromSection(dao.findOne(sectionId));
+        Section section = dao.findOne(sectionId);
+        if (section == null)
+            return Response.ok().entity("Aucune section n'a été trouvée").build();
+
+        return Response.ok().entity(SectionDTO.fromSection(section)).build();
     }
 
     @GET
     @Path("/all")
-    public List<SectionDTO> getAllSections() {
+    public Response getAllSections() {
         SectionDao dao = new SectionDao();
+        List<Section> sectionList = dao.findAll();
         List<SectionDTO> sections = new ArrayList<>();
-        for (Section section: dao.findAll()) {
+        if (sectionList == null || sectionList.isEmpty())
+            return Response.ok().entity("Aucune section n'a été trouvée").build();
+
+        for (Section section : dao.findAll()) {
             sections.add(SectionDTO.fromSection(section));
         }
-        return sections;
+        return Response.ok().entity(sections).build();
     }
 
     @POST

@@ -12,6 +12,7 @@ public class Section implements Serializable {
     private Long id;
     private TypeSection status;
     private List<Fiche> fiches = new ArrayList<>();
+    private Tableau tableau;
 
     @Id
     @GeneratedValue
@@ -40,5 +41,14 @@ public class Section implements Serializable {
 
     public void setFiches(List<Fiche> fiches) {
         this.fiches = fiches;
+    }
+
+    @ManyToOne
+    public Tableau getTableau() {
+        return tableau;
+    }
+
+    public void setTableau(Tableau tableau) {
+        this.tableau = tableau;
     }
 }

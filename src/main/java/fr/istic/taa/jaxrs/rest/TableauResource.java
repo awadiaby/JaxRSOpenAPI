@@ -1,11 +1,7 @@
 package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.TableauDao;
-import fr.istic.taa.jaxrs.domain.Fiche;
-import fr.istic.taa.jaxrs.domain.Section;
 import fr.istic.taa.jaxrs.domain.Tableau;
-import fr.istic.taa.jaxrs.dto.FicheDTO;
-import fr.istic.taa.jaxrs.dto.SectionDTO;
 import fr.istic.taa.jaxrs.dto.TableauDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -19,21 +15,28 @@ import java.util.List;
 public class TableauResource {
     @GET
     @Path("/{tableauId}")
-    public TableauDTO getTableauById(@PathParam("tableauId") Long tableauId) {
+    public Response getTableauById(@PathParam("tableauId") Long tableauId) {
         TableauDao dao = new TableauDao();
-        return TableauDTO.fromTableau(dao.findOne(tableauId));
+        Tableau tableau = dao.findOne(tableauId);
+        if (tableau == null)
+            return Response.ok().entity("Aucun tableau n'a été trouvé").build();
+
+        return Response.ok().entity(TableauDTO.fromTableau(tableau)).build();
     }
 
     @GET
     @Path("/all")
-    public List<TableauDTO> getAllTableaux() {
+    public Response getAllTableaux() {
         TableauDao dao = new TableauDao();
         List<Tableau> dbTableaux = dao.findAll();
+        if (dbTableaux == null || dbTableaux.isEmpty())
+            return Response.ok().entity("Aucun tableau n'a été trouvé").build();
+
         List<TableauDTO> tableaux = new ArrayList<>();
-        for (Tableau t: dbTableaux) {
+        for (Tableau t : dbTableaux) {
             tableaux.add(TableauDTO.fromTableau(t));
         }
-        return tableaux;
+        return Response.ok().entity(tableaux).build();
     }
 
     @POST

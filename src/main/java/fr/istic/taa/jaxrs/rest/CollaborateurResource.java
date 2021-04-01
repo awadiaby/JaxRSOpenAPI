@@ -1,7 +1,9 @@
 package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.impl.CollaborateurDAO;
+import fr.istic.taa.jaxrs.dao.impl.FicheDao;
 import fr.istic.taa.jaxrs.domain.Collaborateur;
+import fr.istic.taa.jaxrs.domain.Fiche;
 import fr.istic.taa.jaxrs.dto.CollaborateurDTO;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -64,5 +66,14 @@ public class CollaborateurResource {
         }
         return Response.ok().entity(jsonCollaborateurs).build();
     }
-    //TODO add delete method
+
+
+    @DELETE()
+    @Path("/{collaborateurId}")
+    public Response deleteFiche(@PathParam("collaborateurId") Long collaborateurId) {
+        CollaborateurDAO dao = new CollaborateurDAO();
+        Collaborateur collaborateur = dao.findOne(collaborateurId);
+        dao.delete(collaborateur);
+        return Response.ok().entity("SUCCESS: Le collaborateur  a été supprimé :-)").build();
+    }
 }

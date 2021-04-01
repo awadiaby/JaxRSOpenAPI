@@ -8,7 +8,7 @@ Tableau Kanban est une application semblable au tableau de bord Kanban. Il fourn
 
 Nous avons commencé le projet par une conception qui nous a permis d'obtenir le diagramme de classe suivant :
 
-![alt text](https://github.com/[awadiaby]/[JaxRSOpenAPI]/blob/[master]/Diagramme_SIR.jpg?raw=true)
+![alt text](https://github.com/awadiaby/JaxRSOpenAPI/blob/master/Diagramme_SIR.jpg?raw=true)
 
 Dans ce repository vous trouverez le backend du projet. Il s'agit d'une API, qui fournit l'ensemble des services,
 conçu avec le langage Java et le framework JPA/Hibernate.

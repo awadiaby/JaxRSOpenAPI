@@ -16,6 +16,18 @@ import java.util.List;
 
 public class FicheResource {
 
+    @POST
+    @Consumes("application/json")
+    public Response addFiche(
+            @Parameter(description = "Add in the fiche", required = true) Fiche fiche) {
+        if (fiche.getCollaborateur() == null || fiche.getSection() == null)
+            return Response.serverError().entity("Le collaborateur ou la section ne doivent pas être nuls").build();
+
+        FicheDao dao = new FicheDao();
+        dao.save(fiche);
+        return Response.ok().entity("SUCCESS").build();
+    }
+
     @GET
     @Path("/{ficheId}")
     public FicheDTO getFicheById(@PathParam("ficheId") Long ficheId) {
@@ -30,19 +42,10 @@ public class FicheResource {
     public List<FicheDTO> getAllFiches() {
         FicheDao dao = new FicheDao();
         List<FicheDTO> fiches = new ArrayList<>();
-        for (Fiche fiche: dao.findAll()) {
+        for (Fiche fiche : dao.findAll()) {
             fiches.add(FicheDTO.fromFiche(fiche));
         }
         return fiches;
-    }
-
-    @POST
-    @Consumes("application/json")
-    public Response addFiche(
-            @Parameter(description = "Add in the fiche", required = true) Fiche fiche) {
-        FicheDao dao = new FicheDao();
-        dao.save(fiche);
-        return Response.ok().entity("SUCCESS").build();
     }
 
     @DELETE()

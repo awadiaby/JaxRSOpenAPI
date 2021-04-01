@@ -45,7 +45,7 @@ public class Tableau implements Serializable {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "tableau_id")
+    @JoinColumn(name = "tableau_id", nullable = false)
     public List<Section> getSections() {
         return sections;
     }

@@ -14,6 +14,15 @@ import java.util.List;
 @Produces({"application/json", "application/xml"})
 
 public class CollaborateurResource {
+    @POST
+    @Consumes("application/json")
+    public Response addCollaborateur(
+            @Parameter(description = "Add in the collaborator", required = true) Collaborateur clb) {
+        CollaborateurDAO dao = new CollaborateurDAO();
+        dao.save(clb);
+        return Response.ok().entity("SUCCESS").build();
+    }
+
     @GET
     @Path("/{collaborateurId}")
     public CollaborateurDTO getCollaborateurById(@PathParam("collaborateurId") Long collaborateurId) {
@@ -28,7 +37,7 @@ public class CollaborateurResource {
         CollaborateurDAO dao = new CollaborateurDAO();
         List<Collaborateur> dbCollaborateurs = dao.getCollaborateurByName(collaborateurName);
         List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
-        for (Collaborateur clb: dbCollaborateurs) {
+        for (Collaborateur clb : dbCollaborateurs) {
             jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
         }
         return jsonCollaborateurs;
@@ -40,18 +49,9 @@ public class CollaborateurResource {
         CollaborateurDAO dao = new CollaborateurDAO();
         List<Collaborateur> dbCollaborateurs = dao.findAll();
         List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
-        for (Collaborateur clb: dbCollaborateurs) {
+        for (Collaborateur clb : dbCollaborateurs) {
             jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
         }
         return jsonCollaborateurs;
-    }
-
-    @POST
-    @Consumes("application/json")
-    public Response addCollaborateur(
-            @Parameter(description = "Add in the collaborator", required = true) Collaborateur clb) {
-        CollaborateurDAO dao = new CollaborateurDAO();
-        dao.save(clb);
-        return Response.ok().entity("SUCCESS").build();
     }
 }

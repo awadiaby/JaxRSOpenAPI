@@ -34,7 +34,6 @@ public class Section implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "section", cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fiche_id", nullable = false)
     public List<Fiche> getFiches() {
         return fiches;
     }

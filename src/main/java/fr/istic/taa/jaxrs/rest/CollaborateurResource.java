@@ -25,10 +25,13 @@ public class CollaborateurResource {
 
     @GET
     @Path("/{collaborateurId}")
-    public CollaborateurDTO getCollaborateurById(@PathParam("collaborateurId") Long collaborateurId) {
+    public Response getCollaborateurById(@PathParam("collaborateurId") Long collaborateurId) {
         CollaborateurDAO dao = new CollaborateurDAO();
         Collaborateur dbCollaborateur = dao.findOne(collaborateurId);
-        return CollaborateurDTO.fromCollaborateur(dbCollaborateur);
+        if (dbCollaborateur == null)
+            return Response.ok().entity("Pas de collaborateur trouvé avec cet id").build();;
+
+        return Response.ok().entity(CollaborateurDTO.fromCollaborateur(dbCollaborateur)).build();
     }
 
     @GET
@@ -36,6 +39,9 @@ public class CollaborateurResource {
     public List<CollaborateurDTO> getCollaborateurByName(@PathParam("collaborateurName") String collaborateurName) {
         CollaborateurDAO dao = new CollaborateurDAO();
         List<Collaborateur> dbCollaborateurs = dao.getCollaborateurByName(collaborateurName);
+        if (dbCollaborateurs == null)
+            return null;
+
         List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
         for (Collaborateur clb : dbCollaborateurs) {
             jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
@@ -48,10 +54,15 @@ public class CollaborateurResource {
     public List<CollaborateurDTO> getAllCollaborateurs() {
         CollaborateurDAO dao = new CollaborateurDAO();
         List<Collaborateur> dbCollaborateurs = dao.findAll();
+
+        if (dbCollaborateurs == null)
+            return null;
+
         List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
         for (Collaborateur clb : dbCollaborateurs) {
             jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
         }
         return jsonCollaborateurs;
     }
+    //TODO add delete method
 }

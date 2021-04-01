@@ -76,4 +76,6 @@ public class FicheResource {
         dao.update(ficheToUpdate);
         return Response.ok().entity("SUCCESS: La fiche a été mise à jour :-)").build();
     }
+
+    //TODO recupérer les fiches d'un collaborateur
 }

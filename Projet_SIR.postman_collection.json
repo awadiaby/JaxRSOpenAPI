@@ -236,6 +236,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "DeleteCollaborateur",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/collaborateur/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"collaborateur",
+						"7"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

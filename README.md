@@ -1,5 +1,5 @@
 # Tableau KANBAN
-## Auteurs :
+## Auteurs : Awa DIABY & Amadou DIA
 Tableau Kanban est une application semblable au tableau de bord Kanban. Il fournit les fonctionnalités suivantes :
    * Créer un tableau Kanban
    * Rajouter des fiches au tableau

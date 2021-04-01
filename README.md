@@ -34,10 +34,10 @@ Nous avons utilisé swagger pour la représentation de notre API.
 
 ## Importer les données des tests :
  - Télécharger le fichier **data.sql** qui est à la racine du projet
- - Créer une base de données nommées tpjpa
- - Importer les données du fichier téléchagé précédemment en utilisant phpMyadmin ou l'outil fournir par IntelliJ
+ - Créer une base de donnée nommée tpjpa
+ - Importer les données du fichier téléchagé précédemment en utilisant phpMyadmin ou l'outil fourni par IntelliJ
  
-##### Lancer le projet en éxecutant la classe `RestServer`
+##### Lancer le projet en éxecutant la classe principale `RestServer`
 
 Pour acceder à la documentation de l'API tapez l'url suivante sur votre navigateur : http://localhost:8089/api
 

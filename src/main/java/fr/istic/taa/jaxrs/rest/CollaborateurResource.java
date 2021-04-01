@@ -29,40 +29,40 @@ public class CollaborateurResource {
         CollaborateurDAO dao = new CollaborateurDAO();
         Collaborateur dbCollaborateur = dao.findOne(collaborateurId);
         if (dbCollaborateur == null)
-            return Response.ok().entity("Pas de collaborateur trouvé avec cet id").build();;
+            return Response.ok().entity("Pas de collaborateur trouvé avec cet id").build();
 
         return Response.ok().entity(CollaborateurDTO.fromCollaborateur(dbCollaborateur)).build();
     }
 
     @GET
     @Path("/name={collaborateurName}")
-    public List<CollaborateurDTO> getCollaborateurByName(@PathParam("collaborateurName") String collaborateurName) {
+    public Response getCollaborateurByName(@PathParam("collaborateurName") String collaborateurName) {
         CollaborateurDAO dao = new CollaborateurDAO();
         List<Collaborateur> dbCollaborateurs = dao.getCollaborateurByName(collaborateurName);
-        if (dbCollaborateurs == null)
-            return null;
+        if (dbCollaborateurs == null || dbCollaborateurs.isEmpty())
+            return Response.ok().entity("Pas de collaborateur avec ce nom").build();
 
         List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
         for (Collaborateur clb : dbCollaborateurs) {
             jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
         }
-        return jsonCollaborateurs;
+        return Response.ok().entity(jsonCollaborateurs).build();
     }
 
     @GET
     @Path("/all")
-    public List<CollaborateurDTO> getAllCollaborateurs() {
+    public Response getAllCollaborateurs() {
         CollaborateurDAO dao = new CollaborateurDAO();
         List<Collaborateur> dbCollaborateurs = dao.findAll();
 
-        if (dbCollaborateurs == null)
-            return null;
+        if (dbCollaborateurs == null || dbCollaborateurs.isEmpty())
+            return Response.ok().entity("Aucun collaborateur n'a été trouvé").build();
 
         List<CollaborateurDTO> jsonCollaborateurs = new ArrayList<>();
         for (Collaborateur clb : dbCollaborateurs) {
             jsonCollaborateurs.add(CollaborateurDTO.fromCollaborateur(clb));
         }
-        return jsonCollaborateurs;
+        return Response.ok().entity(jsonCollaborateurs).build();
     }
     //TODO add delete method
 }

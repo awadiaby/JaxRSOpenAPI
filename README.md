@@ -45,3 +45,4 @@ Vous pouvez tester directement l'API sur l'interface de Swagger accessible via l
 Vous trouverez à la racine du projet un ensemble de collections qui vous facilitera la tâche dans le dossier test-api.
 
 
+

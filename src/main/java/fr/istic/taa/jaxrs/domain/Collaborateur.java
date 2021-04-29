@@ -16,6 +16,7 @@ public class Collaborateur implements Serializable {
     private String email;
     private String nom;
     private String prenom;
+    private String role;
     private List<Fiche> fiches = new ArrayList<>();
 
     @Id
@@ -51,6 +52,15 @@ public class Collaborateur implements Serializable {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @JsonIgnore
     @OneToMany(mappedBy = "collaborateur", cascade = CascadeType.PERSIST)
     public List<Fiche> getFiches() {

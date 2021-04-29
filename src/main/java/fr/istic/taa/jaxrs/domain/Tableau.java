@@ -14,6 +14,7 @@ public class Tableau implements Serializable {
     private Long id;
     private String nom;
     private Date dateCreation;
+    private String description;
     private List<Section> sections = new ArrayList<>();
 
     @Id
@@ -41,6 +42,14 @@ public class Tableau implements Serializable {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = new Date();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @JsonIgnore

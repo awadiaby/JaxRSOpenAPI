@@ -54,6 +54,22 @@ public class FicheResource {
         return Response.ok().entity(fiches).build();
     }
 
+    @GET
+    @Path("/all/{tableauId}")
+    public Response getFichesByTableauId(@PathParam("tableauId") Long tableauId) {
+        FicheDao dao = new FicheDao();
+        List<Fiche> dbFiches = dao.getFichesByTableauId(tableauId);
+        if (dbFiches == null || dbFiches.isEmpty())
+            return Response.ok().entity("Aucune fiche n'a été trouvée").build();
+
+        List<FicheDTO> fiches = new ArrayList<>();
+        for (Fiche fiche : dbFiches) {
+            fiches.add(FicheDTO.fromFiche(fiche));
+        }
+
+        return Response.ok().entity(fiches).build();
+    }
+
     @DELETE()
     @Path("/{ficheId}")
     public Response deleteFiche(@PathParam("ficheId") Long ficheId) {

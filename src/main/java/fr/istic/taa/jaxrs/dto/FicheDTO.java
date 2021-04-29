@@ -11,6 +11,7 @@ public class FicheDTO {
     private String collaborateurFullName;
     private Long dureeTache;
     private String commit;
+    private String collaborateurRole;
     private String sectionStatus;
 
     public String getLibelle() {
@@ -61,6 +62,14 @@ public class FicheDTO {
         this.collaborateurFullName = collaborateurFullName;
     }
 
+    public String getCollaborateurRole() {
+        return collaborateurRole;
+    }
+
+    public void setCollaborateurRole(String collaborateurRole) {
+        this.collaborateurRole = collaborateurRole;
+    }
+
     public Long getDureeTache() {
         return dureeTache;
     }
@@ -89,12 +98,14 @@ public class FicheDTO {
         FicheDTO ficheDTO = new FicheDTO();
         ficheDTO.setCollaborateurFullName(fiche.getCollaborateur().getPrenom()
                 + " " + fiche.getCollaborateur().getNom());
+        ficheDTO.setCollaborateurRole(fiche.getCollaborateur().getRole());
         ficheDTO.setCommit(fiche.getCommit());
         ficheDTO.setLibelle(fiche.getLibelle());
         ficheDTO.setDate(fiche.getDate().toString());
         ficheDTO.setLieu(fiche.getLieu());
         ficheDTO.setDureeTache(fiche.getDureeTache());
         ficheDTO.setUrl(fiche.getUrl());
+        ficheDTO.setNote(fiche.getNote());
         ficheDTO.setSectionStatus(fiche.getSection().getStatus().toString());
         return ficheDTO;
     }

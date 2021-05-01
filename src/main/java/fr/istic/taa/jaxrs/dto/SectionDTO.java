@@ -11,10 +11,19 @@ import static fr.istic.taa.jaxrs.dto.FicheDTO.fromFiche;
 
 public class SectionDTO {
     private String status;
+    private Long id;
     private List<FicheDTO> fiches = new ArrayList<>();
 
     public String getStatus() {
         return status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setStatus(String status) {
@@ -32,6 +41,7 @@ public class SectionDTO {
     public static SectionDTO fromSection(Section section) {
         SectionDTO dto = new SectionDTO();
         dto.setStatus(section.getStatus().toString());
+        dto.setId(section.getId());
         List<FicheDTO> dtoFiches = new ArrayList<>();
         for (Fiche fiche: section.getFiches()) {
             dtoFiches.add(fromFiche(fiche));

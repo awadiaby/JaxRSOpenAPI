@@ -4,6 +4,7 @@ import fr.istic.taa.jaxrs.domain.Fiche;
 
 public class FicheDTO {
     private String libelle;
+    private Long id;
     private String lieu;
     private String url;
     private String note;
@@ -70,6 +71,14 @@ public class FicheDTO {
         this.collaborateurRole = collaborateurRole;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getDureeTache() {
         return dureeTache;
     }
@@ -96,6 +105,7 @@ public class FicheDTO {
 
     public static FicheDTO fromFiche(Fiche fiche) {
         FicheDTO ficheDTO = new FicheDTO();
+        ficheDTO.setId(fiche.getId());
         ficheDTO.setCollaborateurFullName(fiche.getCollaborateur().getPrenom()
                 + " " + fiche.getCollaborateur().getNom());
         ficheDTO.setCollaborateurRole(fiche.getCollaborateur().getRole());
@@ -106,7 +116,7 @@ public class FicheDTO {
         ficheDTO.setDureeTache(fiche.getDureeTache());
         ficheDTO.setUrl(fiche.getUrl());
         ficheDTO.setNote(fiche.getNote());
-        ficheDTO.setSectionStatus(fiche.getSection().getStatus().toString());
+        //ficheDTO.setSectionStatus(fiche.getSection().getStatus().toString());
         return ficheDTO;
     }
 }

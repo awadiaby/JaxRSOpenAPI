@@ -65,7 +65,7 @@ public class TableauResource {
         TableauDao dao = new TableauDao();
         Tableau tableauToUpdate = dao.findOne(tableauId);
         tableauToUpdate.setNom(tableau.getNom());
-        tableauToUpdate.setDateCreation(tableau.getDateCreation());
+        tableauToUpdate.setDescription(tableau.getDescription());
 
         dao.update(tableauToUpdate);
         return Response.ok().entity("SUCCESS: La tableau a été mise à jour :-)").build();

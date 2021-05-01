@@ -9,6 +9,7 @@ import java.util.List;
 import static fr.istic.taa.jaxrs.dto.FicheDTO.fromFiche;
 
 public class CollaborateurDTO {
+    private Long id;
     private String email;
     private String nom;
     private String prenom;
@@ -34,6 +35,14 @@ public class CollaborateurDTO {
         return prenom;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
@@ -48,6 +57,7 @@ public class CollaborateurDTO {
 
     public static CollaborateurDTO fromCollaborateur(Collaborateur clb) {
         CollaborateurDTO dto = new CollaborateurDTO();
+        dto.setId(clb.getId());
         dto.setEmail(clb.getEmail());
         dto.setPrenom(clb.getPrenom());
         dto.setNom(clb.getNom());

@@ -53,7 +53,7 @@ public class Tableau implements Serializable {
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tableau",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tableau", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     public List<Section> getSections() {
         return sections;
     }

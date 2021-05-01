@@ -87,7 +87,7 @@ public class FicheResource {
         FicheDao dao = new FicheDao();
         Fiche ficheToUpdate = dao.findOne(ficheId);
         ficheToUpdate.setDate(fiche.getDate());
-        ficheToUpdate.setCollaborateur(fiche.getCollaborateur());
+        //ficheToUpdate.setCollaborateur(fiche.getCollaborateur());
         ficheToUpdate.setCommit(fiche.getCommit());
         ficheToUpdate.setDureeTache(fiche.getDureeTache());
         ficheToUpdate.setUrl(fiche.getUrl());

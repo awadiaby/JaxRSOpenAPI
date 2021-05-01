@@ -25,6 +25,7 @@ public class Section implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(unique = true)
     public TypeSection getStatus() {
         return status;
     }
@@ -34,7 +35,7 @@ public class Section implements Serializable {
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "section", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "section", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     public List<Fiche> getFiches() {
         return fiches;
     }
